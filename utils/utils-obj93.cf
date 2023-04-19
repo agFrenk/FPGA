@@ -1,0 +1,6 @@
+v 4
+file . "funciones.vhd" "bd3c999530c2e09d883426c90f76d32a7768e6e3" "20230419015054.638":
+  package funciones at 1( 0) + 0 on 12 body;
+  package body funciones at 42( 1933) + 0 on 13;
+file . "tipos.vhd" "df7d356517ef3f8c395a526991c39cdad0fcb758" "20230419015054.604":
+  package tipos at 1( 0) + 0 on 11;
