@@ -1,7 +1,9 @@
 library IEEE;
+library utils;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use IEEE.math_real.all;
+use utils.funciones.all;
 
 entity dimmer is
   generic(
@@ -28,9 +30,9 @@ begin
         end if;
         
         seconds_passed_int <= seconds_passed_int + 1;
-        -- if seconds_passed_int =(2**N)-1 then
-        --     seconds_passed_int <= to_signed(0, N+1);
-        -- end if;
+        if seconds_passed_int = ceil2power(N)-1 then
+            seconds_passed_int <= to_signed(0, N+1);
+        end if;
         wait for 1 sec;
     end process;
 

@@ -6,7 +6,7 @@ entity dimmer_tb is
 end entity;
 
 architecture tb_arch of dimmer_tb is
-  constant N : natural := 7;
+  constant N : natural := 2;
     -- import the entity to be tested
     component dimmer is
         generic(N:natural);
@@ -21,7 +21,7 @@ architecture tb_arch of dimmer_tb is
 
     --Inputs
     signal clk     : std_logic := '0';
-    signal duty_cycle : std_logic_vector(3 downto 0) := "0010";
+    signal duty_cycle : std_logic_vector(3 downto 0) := "0001";
     --Outputs
     signal led_out    : std_logic;
 
