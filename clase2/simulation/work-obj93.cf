@@ -1,0 +1,7 @@
+v 4
+file "/home/pong/Desktop/losFpgamigos/FPGA/clase2/" "testbench/digit_tb.vhd" "7159db2e61397a30cb6ccda0b735a24c96c247f8" "20230421000124.945":
+  entity digit_tb at 1( 0) + 0 on 33;
+  architecture tb_arch of digit_tb at 8( 91) + 0 on 34;
+file "/home/pong/Desktop/losFpgamigos/FPGA/clase2/" "src/digit.vhdl" "03f349e3db435cac5c82459291d74a682344b4c5" "20230421000124.944":
+  entity digit at 1( 0) + 0 on 31;
+  architecture digit_architecture of digit at 18( 358) + 0 on 32;
