@@ -27,10 +27,10 @@ begin
             else
                 if(acumulator = to_unsigned(9, N)) then
                     acumulator <= (others => '0');
-                    carry <= '0';
+                    carry <= '1';
                 else
                     acumulator <= acumulator + 1;
-                    carry <= '1';
+                    carry <= '0';
                 end if;
             end if;
         end if;

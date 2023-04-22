@@ -2,19 +2,18 @@ library IEEE;
 library utils;
 use IEEE.std_logic_1164.all;
 
-entity digit_tb is
+entity stopwatch_tb is
 end entity;
 
-architecture tb_arch of digit_tb is
-  constant N : natural := 4;
+architecture tb_arch of stopwatch_tb is
+  constant M : natural := 4;
     -- import the entity to be tested
-    component digit is
-        generic(N:natural);
+    component stopwatch is
+        generic(M:natural);
         port(
             clk_i           : in std_logic;
             reset_i          : in std_logic;
-            carry_o         : out std_logic;
-            clr_o           : out std_logic_vector(N-1 downto 0) 
+            stpwatch_o           : out std_logic_vector(11 downto 0) 
         );
     end component;
     
@@ -24,22 +23,19 @@ architecture tb_arch of digit_tb is
     signal clk     : std_logic := '0';
     signal reset_i :  std_logic := '0';
     --Outputs
-    signal carry_o: std_logic;
-    signal clr_o : std_logic_vector(N-1 downto 0) := (others => '0');
+    signal stpwatch_o : std_logic_vector(12-1 downto 0);
 
   -- Clock period definitions
   constant clk_period : time := 100 ms;
 
 begin
     -- instantiate the entity under test
-    uut: digit
-    generic map(N => 4)
+    uut: stopwatch
+    generic map(M => 4)
     port map(
         clk_i => clk,
         reset_i => reset_i,
-        carry_o => carry_o,
-        clr_o => clr_o
-
+        stpwatch_o => stpwatch_o
     );
 
     -- Clock process definitions
