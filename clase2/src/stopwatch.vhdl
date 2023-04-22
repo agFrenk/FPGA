@@ -16,6 +16,7 @@ end entity stopwatch;
 architecture stopwatch_architecture of stopwatch is
   signal stopwatch_intermediate : std_logic_vector(11 downto 0) ;
   signal next_carry : std_logic_vector(2 downto 0);
+  signal noop : std_logic := '0';
 
     -- import the entity to be used
     component digit is
@@ -23,6 +24,7 @@ architecture stopwatch_architecture of stopwatch is
         port(
             clk_i           : in std_logic;
             reset_i          : in std_logic;
+            carry_i         : in std_logic;
             carry_o         : out std_logic;
             clr_o           : out std_logic_vector(N-1 downto 0) 
         );
@@ -37,6 +39,7 @@ begin  -- architecture stopwatch_architecture
               port map (
                       clk_i => clk_i,
                       reset_i => reset_i,
+                      carry_i => noop,
                       carry_o => next_carry(0),
                       clr_o => stopwatch_intermediate(3 downto 0)
               );
@@ -48,8 +51,9 @@ begin  -- architecture stopwatch_architecture
                 N => M
               )
               port map (
-                      clk_i => next_carry(i - 1),
+                      clk_i => clk_i,
                       reset_i => reset_i,
+                      carry_i => next_carry(i-1),
                       carry_o => next_carry(i),
                       clr_o => stopwatch_intermediate((i * 4) + 3  downto (i * 4))
               );

@@ -26,7 +26,7 @@ architecture tb_arch of stopwatch_tb is
     signal stpwatch_o : std_logic_vector(12-1 downto 0);
 
   -- Clock period definitions
-  constant clk_period : time := 100 ms;
+  constant clk_period : time := 1 us;
 
 begin
     -- instantiate the entity under test

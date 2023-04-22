@@ -13,6 +13,7 @@ architecture tb_arch of digit_tb is
         port(
             clk_i           : in std_logic;
             reset_i          : in std_logic;
+            carry_i         : in std_logic;
             carry_o         : out std_logic;
             clr_o           : out std_logic_vector(N-1 downto 0) 
         );
@@ -21,6 +22,7 @@ architecture tb_arch of digit_tb is
     -- signals to connect to the entity under test
 
     --Inputs
+    signal carry_i : std_logic := '0';   
     signal clk     : std_logic := '0';
     signal reset_i :  std_logic := '0';
     --Outputs
@@ -28,7 +30,7 @@ architecture tb_arch of digit_tb is
     signal clr_o : std_logic_vector(N-1 downto 0) := (others => '0');
 
   -- Clock period definitions
-  constant clk_period : time := 100 ms;
+  constant clk_period : time := 1 us;
 
 begin
     -- instantiate the entity under test
@@ -37,6 +39,7 @@ begin
     port map(
         clk_i => clk,
         reset_i => reset_i,
+        carry_i => carry_i,
         carry_o => carry_o,
         clr_o => clr_o
 

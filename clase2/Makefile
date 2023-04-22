@@ -1,6 +1,6 @@
 # vhdl files
 FILES = src/*
-DUT:=stopwatch
+DUT:=digit
 
 # testbench
 TESTBENCHFILE = ${DUT}_tb
