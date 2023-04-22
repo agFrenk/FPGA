@@ -19,19 +19,7 @@ end entity;
 architecture digit_architecture of digit is
     signal carry_out_s        : std_logic := '0';
     signal acumulator    : unsigned(N-1 downto 0) := to_unsigned(0, N);
-    signal clock_counter : natural := 1;
 begin
-
-    process(clk_i)
-    begin
-        if (clk_i'event and clk_i = '1') then
-            if (clock_counter = 100001) then
-                clock_counter <= 1;
-            else
-                clock_counter <= clock_counter + 1;
-            end if;
-        end if;
-    end process;
 
     process(clk_i, reset_i, carry_i)
     begin
@@ -40,18 +28,16 @@ begin
               carry_out_s <= '0';
               acumulator <= (others => '0');
             else
-                if(acumulator = to_unsigned(9, N)) then
-                    acumulator <= (others => '0');
-                    carry_out_s <= '1';
+                if(carry_i'event and carry_i = '1') then
+                    if(acumulator = to_unsigned(9, N)) then
+                            acumulator <= (others => '0');
+                            carry_out_s <= '1';
+                    else
+                        acumulator <= acumulator + 1;
+                    end if;
                 else
-                  carry_out_s <= '0';
-                  if(clock_counter = 100001) then
-                    acumulator <= acumulator + 1;
-                  end if;
-                end if;
-            end if;
-            if(carry_i'event and carry_i = '1') then
-              acumulator <= acumulator + 1;
+                    carry_out_s <= '0';
+                end if:
             end if;
         end if;
     end process;
