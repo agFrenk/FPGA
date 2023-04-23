@@ -28,7 +28,7 @@ begin
               carry_out_s <= '0';
               acumulator <= (others => '0');
             else
-                if(carry_i'event and carry_i = '1') then
+                if(carry_i = '1') then
                     if(acumulator = to_unsigned(9, N)) then
                             acumulator <= (others => '0');
                             carry_out_s <= '1';
@@ -37,7 +37,7 @@ begin
                     end if;
                 else
                     carry_out_s <= '0';
-                end if:
+                end if;
             end if;
         end if;
     end process;

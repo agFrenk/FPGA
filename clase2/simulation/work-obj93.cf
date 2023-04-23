@@ -1,0 +1,16 @@
+v 4
+file "/home/pong/Desktop/fpga/FPGA/clase2/" "src/decisecond_signal.vhdl" "9ebdf7c4d4cd1937c7f8f97a4bf3c3af94eea567" "20230423004800.767":
+  entity decisecond at 1( 0) + 0 on 275;
+  architecture decisecond_architecture of decisecond at 17( 300) + 0 on 276;
+file "/home/pong/Desktop/fpga/FPGA/clase2/" "src/digit.vhdl" "306def70eb6305571c50098bb038f2bb49ddd2aa" "20230423004800.767":
+  entity digit at 1( 0) + 0 on 277;
+  architecture digit_architecture of digit at 19( 398) + 0 on 278;
+file "/home/pong/Desktop/fpga/FPGA/clase2/" "src/stopwatch.vhdl" "ded5d46756d9cf878ff20ffca363b6f28342b025" "20230423004800.768":
+  entity stopwatch at 1( 0) + 0 on 279;
+  architecture stopwatch_architecture of stopwatch at 18( 326) + 0 on 280;
+file "/home/pong/Desktop/fpga/FPGA/clase2/" "testbench/digit_tb.vhd" "6292f6da4a8d760b37afb92f51261adf2678a463" "20230423000532.421":
+  entity digit_tb at 1( 0) + 0 on 97;
+  architecture tb_arch of digit_tb at 8( 91) + 0 on 98;
+file "/home/pong/Desktop/fpga/FPGA/clase2/" "testbench/stopwatch_tb.vhd" "2ec5265821de3904c4dd08f5e96ec7c6310c0885" "20230423004800.768":
+  entity stopwatch_tb at 1( 0) + 0 on 281;
+  architecture tb_arch of stopwatch_tb at 8( 95) + 0 on 282;

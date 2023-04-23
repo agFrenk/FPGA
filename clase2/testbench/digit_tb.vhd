@@ -53,5 +53,13 @@ begin
       clk <= '0';
       wait for clk_period/2;
     end process;
-        
+
+    carry_process : process
+    begin
+      carry_i <= '0';
+      wait for 500 ms;
+      carry_i <= '1';
+      wait for 500 ms;
+    end process;
+
 end architecture;

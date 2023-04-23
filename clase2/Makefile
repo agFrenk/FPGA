@@ -1,6 +1,6 @@
 # vhdl files
 FILES = src/*
-DUT:=digit
+DUT:=stopwatch
 
 # testbench
 TESTBENCHFILE = ${DUT}_tb
@@ -10,7 +10,7 @@ TESTBENCHPATH = testbench/${TESTBENCHFILE}.vhd
 
 GHDL_FLAGS  = --ieee=standard --warn-no-vital-generic
 SIMDIR = simulation
-STOP_TIME = 10000ms
+STOP_TIME = 1000000ms
 
 # Simulation break condition
 #GHDL_SIM_OPT = --assert-level=error

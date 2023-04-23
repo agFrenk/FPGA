@@ -9,7 +9,10 @@ architecture tb_arch of stopwatch_tb is
   constant M : natural := 4;
     -- import the entity to be tested
     component stopwatch is
-        generic(M:natural);
+        generic(
+          M:natural;
+          clocks_to_decisecond : natural
+        );
         port(
             clk_i           : in std_logic;
             reset_i          : in std_logic;
@@ -26,12 +29,15 @@ architecture tb_arch of stopwatch_tb is
     signal stpwatch_o : std_logic_vector(12-1 downto 0);
 
   -- Clock period definitions
-  constant clk_period : time := 1 us;
+  constant clk_period : time := 1 ms;
 
 begin
     -- instantiate the entity under test
     uut: stopwatch
-    generic map(M => 4)
+    generic map(
+      M => 4,
+      clocks_to_decisecond => 100
+    ) 
     port map(
         clk_i => clk,
         reset_i => reset_i,
