@@ -1,7 +1,7 @@
 v 4
-file "/home/pong/Documents/fpga/" "testbench/encoder_rle_tb.vhd" "762bce49c5f1006c31f3ba334ccfb3bc2ee5aeab" "20230620212307.327":
-  entity encoder_rle_tb at 1( 0) + 0 on 247;
-  architecture testbench_architecture of encoder_rle_tb at 7( 90) + 0 on 248;
-file "/home/pong/Documents/fpga/" "src/encoder_rle.vhdl" "08b8a289358a24c11d1bf8bf361fd21a46cf9308" "20230620212307.327":
-  entity encoder_rle at 1( 0) + 0 on 245;
-  architecture encoder_architecture of encoder_rle at 18( 440) + 0 on 246;
+file "/home/pong/Documents/FPGA/proyecto_final/" "src/encoder_rle.vhdl" "002904c6187076345a3fd5b0469eb591d69cad1b" "20230620224558.758":
+  entity encoder_rle at 1( 0) + 0 on 357;
+  architecture encoder_architecture of encoder_rle at 19( 475) + 0 on 358;
+file "/home/pong/Documents/FPGA/proyecto_final/" "testbench/encoder_rle_tb.vhd" "6b55ee13f4f13c22e32666682a113f447ce9c436" "20230620224558.758":
+  entity encoder_rle_tb at 1( 0) + 0 on 359;
+  architecture testbench_architecture of encoder_rle_tb at 7( 90) + 0 on 360;

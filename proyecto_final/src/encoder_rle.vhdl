@@ -11,17 +11,19 @@ entity encoder_rle is
       clk_i         : in std_logic;
       reset_i       : in std_logic;
       output_o      : out std_logic_vector ((WIDTH*2)-1 downto 0);
-      ready_o       : out std_logic
+      ready_o       : out std_logic;
+      size_o        : out integer
    );
 end encoder_rle;
 
 architecture encoder_architecture of encoder_rle is
     constant character_size                 : integer := 8;
     signal character_index                  : integer := (WIDTH/8)-1;
-    signal consecutive_characters           : integer := 0;
+    signal consecutive_characters           : integer := 1;
     signal compresion_size                  : natural := 0;
     signal characters_to_compress           : std_logic_vector (WIDTH-1 downto 0) :=  (others => '0');
-    shared variable compresion_result       : std_logic_vector((WIDTH*2)-1 downto 0) := (others => '0');
+    signal where_to_write_in_result         : integer := (WIDTH*2);
+    signal compresion_result       : std_logic_vector((WIDTH*2)-1 downto 0) := (others => '0');
 
 
 begin
@@ -37,18 +39,28 @@ begin
             if(character_index > 0) then
                 if(get_character_from_array(characters_to_compress, character_index, character_size) = 
                     get_character_from_array(characters_to_compress, character_index -1, character_size)) then
-                        consecutive_characters <= consecutive_characters + 1;      
+                        consecutive_characters <= consecutive_characters + 1;
+                        compresion_result <= compresion_result;    
                 else
-                        consecutive_characters <= 0;
+                        compresion_result(where_to_write_in_result-1 downto where_to_write_in_result - 8) <= std_logic_vector(to_unsigned(consecutive_characters, 8));
+                        compresion_result(where_to_write_in_result-1-8 downto where_to_write_in_result - 8-8) <= get_character_from_array(characters_to_compress, character_index, character_size);
+                        where_to_write_in_result <= where_to_write_in_result - 16;
+                        consecutive_characters <= 1;
                         compresion_size <= compresion_size + 2;
+
                 end if;
                 ready_o <= '0';
                 character_index <= character_index - 1;
+            elsif character_index = 0 then
+                compresion_result(where_to_write_in_result-1 downto where_to_write_in_result - 8) <= std_logic_vector(to_unsigned(consecutive_characters, 8));
+                compresion_result(where_to_write_in_result-1-8 downto where_to_write_in_result - 8-8) <= get_character_from_array(characters_to_compress, character_index, character_size);
+                compresion_size <= compresion_size + 2;
+                character_index <= character_index - 1;
+            else
+            ready_o <= '1';
             end if;
-            output_o <= (others => '0');
-            
+            output_o <= compresion_result;
+            size_o <= compresion_size;
         end if;
     end process;
-
-    output_o <= compresion_result;
 end architecture;

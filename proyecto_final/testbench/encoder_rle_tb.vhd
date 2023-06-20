@@ -14,6 +14,7 @@ architecture testbench_architecture of encoder_rle_tb is
     signal reset_sig    : std_logic := '0';
     signal output_sig   : std_logic_vector((WIDTH*2)-1 downto 0);
     signal ready_sig    : std_logic;
+    signal size_sig    : integer;
 
     -- Component declaration
     component encoder_rle
@@ -23,7 +24,9 @@ architecture testbench_architecture of encoder_rle_tb is
             clk_i       : in std_logic;
             reset_i     : in std_logic;
             output_o    : out std_logic_vector((WIDTH*2)-1 downto 0);
-            ready_o     : out std_logic
+            ready_o     : out std_logic;
+            size_o      : out integer
+
         );
     end component;
 
@@ -38,7 +41,8 @@ begin
         clk_i       => clk_sig,
         reset_i     => reset_sig,
         output_o    => output_sig,
-        ready_o     => ready_sig
+        ready_o     => ready_sig,
+        size_o      => size_sig
     );
 
     -- Clock generation process
@@ -57,7 +61,7 @@ begin
     process
     begin
         -- Provide test vector
-        input_sig <= "1111111110101010101010101111000011000000101110101111010101000100";
+        input_sig <= "1111111110101010101010101111000011000000101110101111010111110101";
         wait for 100 ns;
 
         -- Add additional test cases here if needed
