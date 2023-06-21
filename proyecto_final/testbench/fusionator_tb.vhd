@@ -79,10 +79,10 @@ begin  -- architecture behavioral
     -- Provide test inputs
     in_ready_1_tb <= '1';
     in_ready_2_tb <= '1';
-    input_1_tb <= x"01020304050607080910456000000001";
-    size_1_tb <= 10 * 8;
-    input_2_tb <= x"11121314151617181920665432100000";
-    size_2_tb <= 10 * 8;
+    input_1_tb <= x"01020304050607080F10a1a2a3a4a5a6";
+    size_1_tb <= 10;
+    input_2_tb <= x"0F10aaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    size_2_tb <= 4;
 
     -- Wait for some time to observe the output
     wait for 4 ns;
