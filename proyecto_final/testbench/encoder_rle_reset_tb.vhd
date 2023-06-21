@@ -1,10 +1,10 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity encoder_rle_tb is
-end encoder_rle_tb;
+entity encoder_rle_reset_tb is
+end encoder_rle_reset_tb;
 
-architecture testbench_architecture of encoder_rle_tb is
+architecture testbench_architecture of encoder_rle_reset_tb is
     -- Constants
     constant WIDTH : natural := 64;
     
@@ -67,6 +67,10 @@ begin
         input_sig <= "1111111110101010101010101111000011000000101110101111010111110101";
         wait for 10 ns;
         input_signal_ready_sig <= '0';
+        wait for 60 ns;
+        reset_sig <= '1';
+        wait for 6 ns;
+        reset_sig <= '0';
         wait for 100 ns;
         
         -- Add additional test cases here if needed

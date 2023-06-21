@@ -1,7 +1,10 @@
 v 4
-file "/home/pong/Documents/FPGA/proyecto_final/" "src/encoder_rle.vhdl" "002904c6187076345a3fd5b0469eb591d69cad1b" "20230620224558.758":
-  entity encoder_rle at 1( 0) + 0 on 357;
-  architecture encoder_architecture of encoder_rle at 19( 475) + 0 on 358;
-file "/home/pong/Documents/FPGA/proyecto_final/" "testbench/encoder_rle_tb.vhd" "6b55ee13f4f13c22e32666682a113f447ce9c436" "20230620224558.758":
-  entity encoder_rle_tb at 1( 0) + 0 on 359;
-  architecture testbench_architecture of encoder_rle_tb at 7( 90) + 0 on 360;
+file "/home/pong/Documents/FPGA/proyecto_final/" "testbench/encoder_rle_reset_tb.vhd" "8bcde24436cfdde92b0a1f3c00965b19236b2a3d" "20230621021209.934":
+  entity encoder_rle_reset_tb at 1( 0) + 0 on 445;
+  architecture testbench_architecture of encoder_rle_reset_tb at 7( 102) + 0 on 446;
+file "/home/pong/Documents/FPGA/proyecto_final/" "testbench/encoder_rle_tb.vhd" "1c1585afc77597f757d85ca54c3f3964832d5516" "20230621021252.055":
+  entity encoder_rle_tb at 1( 0) + 0 on 449;
+  architecture testbench_architecture of encoder_rle_tb at 7( 90) + 0 on 450;
+file "/home/pong/Documents/FPGA/proyecto_final/" "src/encoder_rle.vhdl" "2b5c778fc9e883566b897033dba1b508fc1621f5" "20230621021252.054":
+  entity encoder_rle at 1( 0) + 0 on 447;
+  architecture encoder_architecture of encoder_rle at 20( 567) + 0 on 448;

@@ -32,6 +32,9 @@ compile: utils setup
 	ghdl -a $(GHDL_FLAGS) --workdir=$(SIMDIR) -Putils --work=work $(FILES) $(TESTBENCHPATH)
 	ghdl -e $(GHDL_FLAGS) --workdir=$(SIMDIR) -Putils --work=work $(TESTBENCHFILE)
 
+compile_testbench:
+	ghdl -a $(GHDL_FLAGS) --workdir=$(SIMDIR) -Putils --work=work $(FILES) $(TESTBENCHPATH)
+	ghdl -e $(GHDL_FLAGS) --workdir=$(SIMDIR) -Putils --work=work $(TESTBENCHFILES)
 run:
 	ghdl -r -Putils --workdir=$(SIMDIR) $(TESTBENCHFILE) --wave=$(SIMDIR)/$(TESTBENCHFILE).ghw $(GHDL_SIM_OPT)
 
