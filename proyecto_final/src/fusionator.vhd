@@ -6,7 +6,8 @@ entity fusionator is
   port (
     clk           : in std_logic;
     rst             : in std_logic;
-    in_ready        : in std_logic;
+    in_ready_1        : in std_logic;
+    in_ready_2        : in std_logic;
     input_1         : in std_logic_vector(128-1 downto 0);  -- primer input
     size_1          : in integer;   -- size del input 1
     input_2         : in std_logic_vector(128-1 downto 0);  -- segundo input
@@ -24,7 +25,7 @@ begin  -- architecture structural
 
   process(clk)
   begin
-    if (clk'event and clk = '1' and in_ready = '1') then
+    if (clk'event and clk = '1' and in_ready_1 = '1' and in_ready_2 = '1') then
       -- Why is the following code failing a bound check?
         (output_sig(
           255 downto (256 - size_1))
