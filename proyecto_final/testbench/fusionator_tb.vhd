@@ -8,30 +8,32 @@ end entity fusionator_tb;
 architecture behavioral of fusionator_tb is
   -- Component declaration
   component fusionator is
+    generic (WIDTH : integer := 128);
     port (
       clk       : in std_logic;
       rst       : in std_logic;
       in_ready_1  : in std_logic;
       in_ready_2  : in std_logic;
-      input_1   : in std_logic_vector(128-1 downto 0);
+      input_1   : in std_logic_vector(WIDTH-1 downto 0);
       size_1          : in integer;   -- size del input 1
-      input_2   : in std_logic_vector(128-1 downto 0);
+      input_2   : in std_logic_vector(WIDTH-1 downto 0);
       size_2          : in integer;   -- size del input 2
-      output    : out std_logic_vector(256-1 downto 0);
+      output    : out std_logic_vector((WIDTH*2)-1 downto 0);
       out_ready : out std_logic
     );
   end component fusionator;
 
+  constant WIDTH : integer := 128;      -- ANCHO DE ENTRADA
   -- Signal declarations
   signal clk_tb         : std_logic := '0';
   signal rst_tb         : std_logic := '1';
   signal in_ready_1_tb    : std_logic;
   signal in_ready_2_tb    : std_logic;
-  signal input_1_tb     : std_logic_vector(128-1 downto 0);
+  signal input_1_tb     : std_logic_vector(WIDTH-1 downto 0);
   signal size_1_tb      : integer;   -- size del input 2
-  signal input_2_tb     : std_logic_vector(128-1 downto 0);
+  signal input_2_tb     : std_logic_vector(WIDTH-1 downto 0);
   signal size_2_tb      : integer;   -- size del input 2
-  signal output_tb      : std_logic_vector(256-1 downto 0);
+  signal output_tb      : std_logic_vector((WIDTH*2)-1 downto 0);
   signal out_ready_tb   : std_logic;
 
 begin  -- architecture behavioral
@@ -56,9 +58,9 @@ begin  -- architecture behavioral
   begin
     while now < 100 ns loop  -- Simulate for 100 ns
       clk_tb <= '0';
-      wait for 5 ns;
+      wait for 1 ns;
       clk_tb <= '1';
-      wait for 5 ns;
+      wait for 1 ns;
     end loop;
     wait;
   end process clk_proc;
@@ -68,11 +70,11 @@ begin  -- architecture behavioral
   begin
     -- Reset the design
     rst_tb <= '0';
-    wait for 10 ns;
+    wait for 2 ns;
     rst_tb <= '1';
 
     -- Wait for some time after reset
-    wait for 20 ns;
+    wait for 4 ns;
 
     -- Provide test inputs
     in_ready_1_tb <= '1';
@@ -83,7 +85,7 @@ begin  -- architecture behavioral
     size_2_tb <= 10 * 8;
 
     -- Wait for some time to observe the output
-    wait for 10 ns;
+    wait for 4 ns;
 
     -- Stop the simulation
     wait;
