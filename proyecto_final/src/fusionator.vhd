@@ -9,16 +9,16 @@ entity fusionator is
     WIDTH : integer := 128
   );
   port (
-    clk           : in std_logic;
-    rst             : in std_logic;
+    clk               : in std_logic;
+    rst_i             : in std_logic;
     in_ready_1        : in std_logic;
     in_ready_2        : in std_logic;
-    input_1         : in std_logic_vector(WIDTH-1 downto 0);  -- primer input
-    size_1          : in integer;   -- size del input 1
-    input_2         : in std_logic_vector(WIDTH-1 downto 0);  -- segundo input
-    size_2          : in integer;   -- size del input 2
-    output          : out std_logic_vector((WIDTH*2)-1 downto 0);   -- output
-    out_ready       : out std_logic
+    input_1           : in std_logic_vector(WIDTH-1 downto 0);  -- primer input
+    size_1_i          : in integer;   -- size del input 1
+    input_2           : in std_logic_vector(WIDTH-1 downto 0);  -- segundo input
+    size_2_i          : in integer;   -- size del input 2
+    output            : out std_logic_vector((WIDTH*2)-1 downto 0);   -- output
+    out_ready         : out std_logic
     );
 end entity fusionator;
 
