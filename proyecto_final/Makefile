@@ -1,6 +1,6 @@
 # vhdl files
 FILES = src/*
-DUT:=encoder_rle
+DUT:=rle16B
 
 # testbench
 TESTBENCHFILE = ${DUT}_tb

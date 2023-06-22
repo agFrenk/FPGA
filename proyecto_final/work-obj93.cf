@@ -1,0 +1,10 @@
+v 4
+file . "src/fusionator.vhd" "a85e02bd855c4178f5ba9498f36ee96a6ee51abf" "20230622221802.502":
+  entity fusionator at 1( 0) + 0 on 19;
+  architecture structural of fusionator at 25( 762) + 0 on 20;
+file . "src/encoder_rle.vhdl" "2b5c778fc9e883566b897033dba1b508fc1621f5" "20230622221802.459":
+  entity encoder_rle at 1( 0) + 0 on 17;
+  architecture encoder_architecture of encoder_rle at 20( 567) + 0 on 18;
+file . "src/rle16B.vhdl" "2de4cf9c490ca1323e0bfcf188910e550ed0be6a" "20230622222007.951":
+  entity rle16b at 1( 0) + 0 on 25;
+  architecture rle16b_architecture of rle16b at 17( 672) + 0 on 26;
