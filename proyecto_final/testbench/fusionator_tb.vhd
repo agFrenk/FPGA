@@ -11,13 +11,13 @@ architecture behavioral of fusionator_tb is
     generic (WIDTH : integer := 128);
     port (
       clk       : in std_logic;
-      rst       : in std_logic;
+      rst_i       : in std_logic;
       in_ready_1  : in std_logic;
       in_ready_2  : in std_logic;
       input_1   : in std_logic_vector(WIDTH-1 downto 0);
-      size_1          : in integer;   -- size del input 1
+      size_1_i          : in integer;   -- size del input 1
       input_2   : in std_logic_vector(WIDTH-1 downto 0);
-      size_2          : in integer;   -- size del input 2
+      size_2_i          : in integer;   -- size del input 2
       output    : out std_logic_vector((WIDTH*2)-1 downto 0);
       out_ready : out std_logic
     );
@@ -42,13 +42,13 @@ begin  -- architecture behavioral
   dut: fusionator
     port map (
       clk       => clk_tb,
-      rst       => rst_tb,
+      rst_i       => rst_tb,
       in_ready_1  => in_ready_1_tb,
       in_ready_2  => in_ready_2_tb,
       input_1   => input_1_tb,
-      size_1    => size_1_tb,
+      size_1_i    => size_1_tb,
       input_2   => input_2_tb,
-      size_2    => size_2_tb,
+      size_2_i    => size_2_tb,
       output    => output_tb,
       out_ready => out_ready_tb
     );

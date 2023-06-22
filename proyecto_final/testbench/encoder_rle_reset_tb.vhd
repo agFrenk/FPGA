@@ -17,6 +17,8 @@ architecture testbench_architecture of encoder_rle_reset_tb is
     signal size_sig                 : integer;
     signal input_signal_ready_sig   : std_logic;
 
+
+
     -- Component declaration
     component encoder_rle
         generic (WIDTH : natural := 64);
