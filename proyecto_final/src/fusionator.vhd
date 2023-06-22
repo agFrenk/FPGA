@@ -31,50 +31,51 @@ architecture structural of fusionator is
   signal first_element_input2_count : integer;
   signal last_element_input1 : std_logic_vector(character_size - 1 downto 0);
   signal last_element_input1_count  : integer;
+  signal intermedio_suma_de_valores : std_logic := '0';
 
 begin  -- architecture structural
 
-  process(clk)
+  process(clk, in_ready_1, in_ready_2, input_1, input_2)
   begin
     if (clk'event and clk = '1' and in_ready_1 = '1' and in_ready_2 = '1') then
       first_element_input2 <= get_character_from_array(input_2, (WIDTH/character_size) - 2, character_size);
       first_element_input2_count <= to_integer(unsigned(get_character_from_array(input_2,(WIDTH/character_size) - 1, character_size)));
 
-      last_element_input1 <= get_character_from_array(input_1,(WIDTH/character_size) - size_1 , character_size);
-      last_element_input1_count <= to_integer(unsigned(get_character_from_array(input_1, (WIDTH/character_size) - size_1 + 1, character_size)));
+      last_element_input1 <= get_character_from_array(input_1,(WIDTH/character_size) - size_1_i , character_size);
+      last_element_input1_count <= to_integer(unsigned(get_character_from_array(input_1, (WIDTH/character_size) - size_1_i + 1, character_size)));
 
       if ( first_element_input2 = last_element_input1) then
       (output_sig(
         -- 256 - 1                 256 - (size_1 - 2) * 8)
-        ( (WIDTH*2) - 1 ) downto ((WIDTH*2) - (size_1 - 2) * character_size))
-       ) <= input_1(WIDTH - 1 downto (WIDTH - (size_1 - 2) * character_size));
+        ( (WIDTH*2) - 1 ) downto ((WIDTH*2) - (size_1_i - 2) * character_size))
+       ) <= input_1(WIDTH - 1 downto (WIDTH - (size_1_i - 2) * character_size));
 
        -- Seteo el ultimo count como la suma
        (output_sig(
-        (((WIDTH * 2) - 1) - (size_1 - 2 )* character_size)  downto ((WIDTH * 2) - (size_1 - 1) * character_size))
+        (((WIDTH * 2) - 1) - (size_1_i - 2 )* character_size)  downto ((WIDTH * 2) - (size_1_i - 1) * character_size))
        ) <= std_logic_vector(to_unsigned(first_element_input2_count + last_element_input1_count , character_size));
+       intermedio_suma_de_valores <= '1';
 
        -- Escribo 2*character_size menos de el input_2.
        (output_sig(
-        ((WIDTH*2) - 1) - (size_1 - 1 ) * character_size downto ((WIDTH*2) - ( size_1 + size_2 - 2 ) * character_size))
-       ) <= input_2(WIDTH - 1 - (1 * character_size) downto (WIDTH - size_2 * character_size));
-
-      -------------------------------------------------------------------------
-      -- __C| X |C__
-      -------------------------------------------------------------------------
-
+        ((WIDTH*2) - 1) - (size_1_i - 1 ) * character_size downto ((WIDTH*2) - ( size_1_i + size_2_i - 2 ) * character_size))
+       ) <= input_2(WIDTH - 1 - (1 * character_size) downto (WIDTH - size_2_i * character_size));
+      
+       if (intermedio_suma_de_valores = '1') then
+        out_ready_sig <= '1';
+      end if;
       else
         (output_sig(
           (WIDTH*2)-1
           downto
-          ((WIDTH*2) - (size_1 * character_size)))
-         ) <= input_1(WIDTH - 1 downto (WIDTH -size_1* character_size));
+          ((WIDTH*2) - (size_1_i * character_size)))
+         ) <= input_1(WIDTH - 1 downto (WIDTH -size_1_i* character_size));
         (output_sig(
-          (WIDTH*2)-1 - size_1 * character_size downto ((WIDTH*2) - size_1 * character_size - size_2 * character_size))
-         ) <= input_2(WIDTH - 1 downto (WIDTH - size_2 * character_size));
-
+          (WIDTH*2)-1 - size_1_i * character_size downto ((WIDTH*2) - size_1_i * character_size - size_2_i * character_size))
+         ) <= input_2(WIDTH - 1 downto (WIDTH - size_2_i * character_size));
+         out_ready_sig <= '1';
       end if;
-      out_ready_sig <= '1';
+      
     end if;
   end process;
 
