@@ -10,7 +10,7 @@ entity rle16B is
     input_signal_ready_encoder1_i   : in  std_logic;
     input_encoder2_i                : in  std_logic_vector(64-1 downto 0); -- ACA EL 64 ES WITH_ENCODER
     input_signal_ready_encoder2_i   : in  std_logic;
-    output                            : out std_logic_vector((128*2)-1 downto 0);
+    output                          : out std_logic_vector((128*2)-1 downto 0);
     output_ready                    : out std_logic);
 end entity rle16B;
 
@@ -55,23 +55,20 @@ architecture rle16B_architecture of rle16B is
     signal clk_sig              : std_logic := '0';
     signal rst_sig              : std_logic := '1';
     signal output_sig           : std_logic_vector((WIDTH_FUSIONATOR*2)-1 downto 0);
-    signal out_ready_sig        : std_logic;
     
     
     -- Signals Encoder1
     signal input_enconder1_sig                : std_logic_vector(WIDTH_ENCODER-1 downto 0);
     signal reset_encoder1_sig                 : std_logic := '0';
-    signal input_signal_ready_encoder1_sig    : std_logic;
 
     --signals encoder1 y fusionator compartidas 
     signal input_fusionator_output_encoder1_sig         : std_logic_vector(WIDTH_FUSIONATOR-1 downto 0);
-    signal size_1_sig          : integer;   -- size del input 2
-    signal out_ready_enconder1_sig      : std_logic;
+    signal size_1_sig                                   : integer;   -- size del input 2
+    signal out_ready_enconder1_sig                      : std_logic;
     
     -- Signals Encoder2
     signal input_enconder2_sig                : std_logic_vector(WIDTH_ENCODER-1 downto 0);
     signal reset_encoder2_sig                 : std_logic := '0';
-    signal input_signal_ready_encoder2_sig    : std_logic;
     
     
     --signals encoder2 y fusionator compartidas 
@@ -94,7 +91,7 @@ begin  -- architecture behavioral
       input_2     => input_fusionator_output_encoder2_sig,
       size_2_i    => size_2_sig,
       output      => output,
-      out_ready   => out_ready_sig
+      out_ready   => output_ready
     );
   
   uut_ecnoder1: encoder_rle

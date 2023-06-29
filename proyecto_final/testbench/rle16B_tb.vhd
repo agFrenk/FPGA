@@ -78,6 +78,5 @@ begin
          input_signal_ready_encoder2_sig <= '0';
          wait for 100 ns;
          wait;
-     end process;
-        
+     end process;    
 end architecture;
