@@ -30,7 +30,7 @@ architecture rle16B_architecture of rle16B is
         size_1_i      : in integer;   -- size del input 1
         input_2       : in std_logic_vector(WIDTH_FUSIONATOR-1 downto 0);
         size_2_i      : in integer;   -- size del input 2
-        output        : out std_logic_vector((WIDTH_FUSIONATOR*2)-1 downto 0);
+        fusion_o        : out std_logic_vector((WIDTH_FUSIONATOR*2)-1 downto 0);
         out_ready     : out std_logic
         );
     end component fusionator;
@@ -40,10 +40,10 @@ architecture rle16B_architecture of rle16B is
     component encoder_rle
         -- generic (WIDTH_ENCODER : natural := 64);
         port (
-            input_i                 : in std_logic_vector(WIDTH_ENCODER-1 downto 0);
+            characters_to_compress_i                 : in std_logic_vector(WIDTH_ENCODER-1 downto 0);
             clk_i                   : in std_logic;
             reset_i                 : in std_logic;
-            output_o                : out std_logic_vector((WIDTH_ENCODER*2)-1 downto 0);
+            compression_o                : out std_logic_vector((WIDTH_ENCODER*2)-1 downto 0);
             ready_o                 : out std_logic;
             input_signal_ready_i    : in std_logic;
             size_o                  : out integer
@@ -90,16 +90,16 @@ begin  -- architecture behavioral
       size_1_i    => size_1_sig,
       input_2     => input_fusionator_output_encoder2_sig,
       size_2_i    => size_2_sig,
-      output      => output,
+      fusion_o      => output,
       out_ready   => output_ready
     );
   
   uut_ecnoder1: encoder_rle
     port map (
-        input_i                 => input_encoder1_i,
+        characters_to_compress_i                 => input_encoder1_i,
         clk_i                   => clk_i,
         reset_i                 => reset_i,
-        output_o                => input_fusionator_output_encoder1_sig,
+        compression_o                => input_fusionator_output_encoder1_sig,
         ready_o                 => out_ready_enconder1_sig,
         input_signal_ready_i    => input_signal_ready_encoder1_i,
         size_o                  => size_1_sig
@@ -110,10 +110,10 @@ begin  -- architecture behavioral
     --   WIDTH_ENCODER => WIDTH_ENCODER
     -- )
     port map (
-        input_i                 => input_encoder2_i,
+        characters_to_compress_i                 => input_encoder2_i,
         clk_i                   => clk_i,
         reset_i                 => reset_i,
-        output_o                => input_fusionator_output_encoder2_sig,
+        compression_o                => input_fusionator_output_encoder2_sig,
         ready_o                 => out_ready_enconder2_sig,
         input_signal_ready_i    => input_signal_ready_encoder2_i,
         size_o                  => size_2_sig
