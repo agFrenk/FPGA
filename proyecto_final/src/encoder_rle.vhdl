@@ -2,13 +2,12 @@ library IEEE;
 library utils;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.all;
-use utils.funciones.all;
-
+use utils.funciones.all; 
 entity encoder_rle is
     generic ( WIDTH : natural := 64);
    port(
       characters_to_compress_i          : in std_logic_vector (WIDTH-1 downto 0);
-      input_signal_ready_i              : in std_logic;
+      ready_i                           : in std_logic;
       clk_i                             : in std_logic;
       reset_i                           : in std_logic;
       compression_o                     : out std_logic_vector ((WIDTH*2)-1 downto 0);
@@ -40,7 +39,7 @@ begin
                 compression_result <= (others => '0');
                 characters_to_compress_s <= (others => '0');
             else                                                           
-                if input_signal_ready_i = '1' then                          -- set characters to compress
+                if ready_i = '1' then                          -- set characters to compress
                     characters_to_compress_s <= characters_to_compress_i;
                 else                                                        -- compression process
                     if(character_index > 0) then                            
