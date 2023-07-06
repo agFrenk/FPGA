@@ -6,8 +6,8 @@ use utils.funciones.all;
 
 entity divorciator is
   generic (
-    WIDTH_INPUT : integer := 512;
-    WIDTH_RLE : integer := 512 / 2
+    WIDTH_INPUT : integer := 128;
+    WIDTH_RLE : integer := 128 / 2
   );
   port (
     clk : in std_logic;
