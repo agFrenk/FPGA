@@ -41,7 +41,10 @@ begin
           divorced_mom <= (others => '0');
           divorced_dad <= (others => '0');
           ready_signal <= '0';
-          end if;
+        else if ( ready_signal = '1' ) then
+               ready_signal <= '0';
+               end if;
+        end if;
         end if;
       end if;
     end process;

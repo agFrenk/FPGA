@@ -13,10 +13,8 @@ architecture tb_arch of rle16b_tb is
         port (
           clk_i                             : in  std_logic;
           reset_i                           : in  std_logic;
-          input_encoder1_i                  : in  std_logic_vector(WIDTH_ENCODER_IN-1 downto 0);
-          ready_enconder1_i                 : in  std_logic;
-          input_encoder2_i                  : in  std_logic_vector(WIDTH_ENCODER_IN-1 downto 0);
-          ready_enconder2_i                 : in  std_logic;
+          rle_i                             : in  std_logic_vector((WIDTH_ENCODER_IN * 2)-1 downto 0);
+          ready_i                           : in  std_logic;
           rle_compressed_o                  : out std_logic_vector((WIDTH_FUSIONATOR_OUT)-1 downto 0);
           ready_o                           : out std_logic);
     end component;
@@ -26,15 +24,13 @@ architecture tb_arch of rle16b_tb is
     --Inputs
     signal clk_sig              : std_logic := '0';
     signal reset_sig            : std_logic := '0';
-    signal ready_enconder1_s    : std_logic := '0';
-    signal ready_enconder2_s    : std_logic := '0';
-    signal input_encoder1_sig   : std_logic_vector(WIDTH_ENCODER_IN-1 downto 0) := (others => '0');
-    signal input_encoder2_sig   : std_logic_vector(WIDTH_ENCODER_IN-1 downto 0) := (others => '0');
+    signal ready_in_s    : std_logic := '1';
+    signal rle_sig   : std_logic_vector((WIDTH_ENCODER_IN * 2)-1 downto 0) := (others => '0');
 
     
     --Outputs
     signal rle_compressed_s           : std_logic_vector((WIDTH_FUSIONATOR_OUT)-1 downto 0) := (others => '0');
-    signal ready_s                    : std_logic := '0';
+    signal ready_out_s    : std_logic := '0';
 
    
   
@@ -46,12 +42,10 @@ begin
     port map(
           clk_i                           =>  clk_sig,
           reset_i                         =>  reset_sig,
-          input_encoder1_i                =>  input_encoder1_sig,
-          ready_enconder1_i               =>  ready_enconder1_s,
-          input_encoder2_i                =>  input_encoder2_sig,
-          ready_enconder2_i               =>  ready_enconder2_s,
+          rle_i                           =>  rle_sig,
+          ready_i                         =>  ready_in_s,
           rle_compressed_o                =>  rle_compressed_s,
-          ready_o                         =>  ready_s
+          ready_o                         =>  ready_out_s
     );
 
     clk_proc: process
@@ -69,13 +63,11 @@ begin
      process
      begin
          -- Provide test vector
-         ready_enconder1_s <= '1';
-         input_encoder1_sig <= x"AAAAAAAAAAAAAAAA";
-         ready_enconder2_s <= '1';
-         input_encoder2_sig <= x"AAAAAAAAAAAAAAAA";
+         ready_in_s <= '1';
          wait for 10 ns;
-         ready_enconder1_s <= '0';
-         ready_enconder2_s <= '0';
+         rle_sig <= x"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+         wait for 10 ns;
+         ready_in_s <= '0';
          wait for 100 ns;
          wait;
      end process;    
