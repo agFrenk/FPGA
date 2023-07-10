@@ -6,7 +6,7 @@ end encoder_rle_reset_tb;
 
 architecture testbench_architecture of encoder_rle_reset_tb is
     -- Constants
-    constant WIDTH : natural := 64;
+    constant WIDTH : natural := 256;
     
     -- Signals
     signal input_sig                : std_logic_vector(WIDTH-1 downto 0);
@@ -21,7 +21,7 @@ architecture testbench_architecture of encoder_rle_reset_tb is
 
     -- Component declaration
     component encoder_rle
-        generic (WIDTH : natural := 64);
+        generic (WIDTH : natural := 256);
         port (
             input_i                 : in std_logic_vector(WIDTH-1 downto 0);
             clk_i                   : in std_logic;
