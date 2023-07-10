@@ -6,7 +6,7 @@ end encoder_rle_tb;
 
 architecture testbench_architecture of encoder_rle_tb is
     -- Constants
-    constant WIDTH : natural := 64;
+    constant WIDTH : natural := 256;
     
     -- Signals
     signal input_sig                : std_logic_vector(WIDTH-1 downto 0);
@@ -19,7 +19,7 @@ architecture testbench_architecture of encoder_rle_tb is
 
     -- Component declaration
     component encoder_rle
-        generic (WIDTH : natural := 64);
+        generic (WIDTH : natural := 256);
         port (
             input_i                 : in std_logic_vector(WIDTH-1 downto 0);
             clk_i                   : in std_logic;
@@ -64,7 +64,7 @@ begin
     begin
         -- Provide test vector
         input_signal_ready_sig <= '1';
-        input_sig <= "1111111110101010101010101111000011000000101110101111010111110101";
+        input_sig <= x"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         wait for 10 ns;
         input_signal_ready_sig <= '0';
         wait for 100 ns;
