@@ -18,6 +18,7 @@ entity fusionator is
     compression_size1_i         : in integer;   -- size del input 1
     compression_size2_i         : in integer;   -- size del input 2
     fusion_o                    : out std_logic_vector((WIDTH*2)-1 downto 0);   -- output
+    fusion_size_o               : out integer;  -- size de la fusion reusltante
     ready_o                     : out std_logic
     );
 end entity fusionator;
@@ -25,6 +26,7 @@ end entity fusionator;
 architecture structural of fusionator is
   constant character_size : integer := 8;
 
+  signal fusion_size_sig              : integer := 0;
   signal fusion_s                   : std_logic_vector(fusion_o'range) := (others => '0');  -- senial de output
   signal ready_sig                  : std_logic := '0';  -- senial para output ready
   signal first_element_input2       : std_logic_vector(character_size - 1 downto 0);
@@ -60,26 +62,33 @@ begin  -- architecture structural
        (fusion_s(
         ((WIDTH*2) - 1) - (compression_size1_i - 1 ) * character_size downto ((WIDTH*2) - ( compression_size1_i + compression_size2_i - 2 ) * character_size))
        ) <= compressed2_i(WIDTH - 1 - (1 * character_size) downto (WIDTH - compression_size2_i * character_size));
-      
-       if (intermedio_suma_de_valores = '1') then
+
+      fusion_size_sig <= compression_size1_i + compression_size2_i - 2;
+
+      if (intermedio_suma_de_valores = '1') then
         ready_sig <= '1';
       end if;
+
       else
         (fusion_s(
           (WIDTH*2)-1
           downto
           ((WIDTH*2) - (compression_size1_i * character_size)))
          ) <= compressed1_i(WIDTH - 1 downto (WIDTH -compression_size1_i* character_size));
+
         (fusion_s(
           (WIDTH*2)-1 - compression_size1_i * character_size downto ((WIDTH*2) - compression_size1_i * character_size - compression_size2_i * character_size))
          ) <= compressed2_i(WIDTH - 1 downto (WIDTH - compression_size2_i * character_size));
+
+         fusion_size_sig <= compression_size1_i + compression_size2_i;
          ready_sig <= '1';
       end if;
-      
+
     end if;
   end process;
 
   fusion_o <= fusion_s;
+  fusion_size_o <= fusion_size_sig;
   ready_o <= ready_sig;
 
 end architecture structural;

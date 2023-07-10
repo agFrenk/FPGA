@@ -8,7 +8,7 @@ end entity fusionator_tb;
 architecture behavioral of fusionator_tb is
   -- Component declaration
   component fusionator is
-    generic (WIDTH : integer := 512);
+    generic (WIDTH : integer := 128);
     port (
       clk       : in std_logic;
       rst_i       : in std_logic;
@@ -23,7 +23,7 @@ architecture behavioral of fusionator_tb is
     );
   end component fusionator;
 
-  constant WIDTH : integer := 512;      -- ANCHO DE ENTRADA
+  constant WIDTH : integer := 128;      -- ANCHO DE ENTRADA
   -- Signal declarations
   signal clk_tb         : std_logic := '0';
   signal rst_tb         : std_logic := '1';
