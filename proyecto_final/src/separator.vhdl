@@ -43,7 +43,7 @@ architecture structural of separator is
     signal separated_4 : std_logic_vector(WIDTH_ENCODER - 1 downto 0) := (others => '0'); -- cuarta
                                                                    -- senial de
                                                                    -- salida
-    signal ready_signal : std_logic := '1';
+    signal ready_signal : std_logic := '0';
 begin
     process(clk)
     begin

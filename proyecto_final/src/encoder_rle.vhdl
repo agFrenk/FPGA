@@ -41,6 +41,11 @@ begin
             else                                                           
                 if ready_i = '1' then                          -- set characters to compress
                     characters_to_compress_s <= characters_to_compress_i;
+                    character_index <= (WIDTH/CHARACTER_SIZE)-1;
+                    compression_size <= 0;
+                    consecutive_characters <= 1;
+                    where_to_write_in_result <= (WIDTH*2);
+                    compression_result <= (others => '0');
                 else                                                        -- compression process
                     if(character_index > 0) then                            
                         if(get_character_from_array(characters_to_compress_s, character_index, CHARACTER_SIZE) = 
