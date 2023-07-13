@@ -6,7 +6,7 @@ end encoder_rle_tb;
 
 architecture testbench_architecture of encoder_rle_tb is
     -- Constants
-    constant WIDTH : natural := 256;
+    constant WIDTH : natural := 64;
     
     -- Signals
     signal input_sig                : std_logic_vector(WIDTH-1 downto 0);
@@ -19,15 +19,15 @@ architecture testbench_architecture of encoder_rle_tb is
 
     -- Component declaration
     component encoder_rle
-        generic (WIDTH : natural := 256);
+        generic (WIDTH : natural := 64);
         port (
-            input_i                 : in std_logic_vector(WIDTH-1 downto 0);
-            clk_i                   : in std_logic;
-            reset_i                 : in std_logic;
-            output_o                : out std_logic_vector((WIDTH*2)-1 downto 0);
-            ready_o                 : out std_logic;
-            input_signal_ready_i    : in std_logic;
-            size_o                  : out integer
+            characters_to_compress_i : in std_logic_vector(WIDTH-1 downto 0);
+            clk_i                    : in std_logic;
+            reset_i                  : in std_logic;
+            compression_o            : out std_logic_vector((WIDTH*2)-1 downto 0);
+            ready_o                  : out std_logic;
+            ready_i                  : in std_logic;
+            size_o                   : out integer
         );
     end component;
 
@@ -38,12 +38,12 @@ begin
         WIDTH => WIDTH
     )
     port map (
-        input_i                 => input_sig,
+        characters_to_compress_i                 => input_sig,
         clk_i                   => clk_sig,
         reset_i                 => reset_sig,
-        output_o                => output_sig,
+        compression_o                => output_sig,
         ready_o                 => ready_sig,
-        input_signal_ready_i    => input_signal_ready_sig,
+        ready_i    => input_signal_ready_sig,
         size_o                  => size_sig
     );
 
@@ -64,7 +64,7 @@ begin
     begin
         -- Provide test vector
         input_signal_ready_sig <= '1';
-        input_sig <= x"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        input_sig <= x"AAAAAAAAAAAAAAAA";
         wait for 10 ns;
         input_signal_ready_sig <= '0';
         wait for 100 ns;

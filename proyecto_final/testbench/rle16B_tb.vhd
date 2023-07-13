@@ -68,7 +68,8 @@ begin
          -- Provide test vector
          ready_in_s <= '1';
          wait for 10 ns;
-         rle_sig <= x"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+         -- rle_sig <= x"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+         rle_sig <= x"123456789ABCDEF3123456789ABCDEF3123456789ABCDEF3123456789ABCDEF2";
          wait for 10 ns;
          ready_in_s <= '0';
          wait for 100 ns;
