@@ -50,13 +50,13 @@ begin
       if (clk'event and clk = '1') then
         if( ready_i = '1' ) then
           -- From 255 to 192
-          separated_4 <= (separator_in(WIDTH_INPUT - 1 downto WIDTH_ENCODER * 3));
+          separated_1 <= (separator_in(WIDTH_INPUT - 1 downto WIDTH_ENCODER * 3));
           -- From 191 to 128
-          separated_3 <= (separator_in((WIDTH_INPUT - WIDTH_ENCODER ) - 1 downto WIDTH_ENCODER * 2));
+          separated_2 <= (separator_in((WIDTH_INPUT - WIDTH_ENCODER ) - 1 downto WIDTH_ENCODER * 2));
           -- From 127 to 64
-          separated_2 <= (separator_in((WIDTH_INPUT - WIDTH_ENCODER * 2) - 1 downto WIDTH_ENCODER * 1));
+          separated_3 <= (separator_in((WIDTH_INPUT - WIDTH_ENCODER * 2) - 1 downto WIDTH_ENCODER * 1));
           -- From  63 to 0
-          separated_1 <= (separator_in(WIDTH_ENCODER - 1 downto 0));
+          separated_4 <= (separator_in(WIDTH_ENCODER - 1 downto 0));
           ready_signal <= '1';
         else if ( rst_i = '1' ) then
           separated_4 <= (others => '0');
